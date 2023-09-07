@@ -7,11 +7,23 @@ const description = document.querySelector('.description');
 const temperament = document.querySelector('.temperament');
 const loader = document.querySelector('.loader');
 const error = document.querySelector('.error');
+const catImage = catInfo.querySelector('img');
+
+// Hide breed select, cat info, and error initially
+catInfo.style.display = 'none';
+error.style.display = 'none';
+
+// Show loader
+loader.style.display = 'block';
 
 // Fetch and populate breed select options
 fetchBreeds()
     .then(breeds => {
         breedSelect.innerHTML = breeds.map(breed => `<option value="${breed.id}">${breed.name}</option>`).join('');
+        // Hide loader
+        loader.style.display = 'none';
+        // Show breed select
+        breedSelect.style.display = 'block';
     })
     .catch(err => {
         error.style.display = 'block';
@@ -22,10 +34,13 @@ fetchBreeds()
 breedSelect.addEventListener('change', () => {
     const selectedBreedId = breedSelect.value;
 
-    // Hide cat info and show loader
+    // Hide breed select, cat info, and error
+    breedSelect.style.display = 'none';
     catInfo.style.display = 'none';
-    loader.style.display = 'block';
     error.style.display = 'none';
+
+    // Show loader
+    loader.style.display = 'block';
 
     // Fetch cat information by breed
     fetchCatByBreed(selectedBreedId)
@@ -34,14 +49,20 @@ breedSelect.addEventListener('change', () => {
             breedName.textContent = cat.breeds[0].name;
             description.textContent = cat.breeds[0].description;
             temperament.textContent = cat.breeds[0].temperament;
-            catInfo.querySelector('img').src = cat.url;
+            catImage.src = cat.url;
+            catImage.style.maxWidth = '300px';
+            catImage.style.height = 'auto';
 
-            // Show cat info and hide loader
-            catInfo.style.display = 'block';
+            // Hide loader
             loader.style.display = 'none';
+            // Show cat info
+            catInfo.style.display = 'block';
+            // Show breed select after displaying options
+            breedSelect.style.display = 'block';
         })
         .catch(err => {
             error.style.display = 'block';
             console.error(err);
         });
 });
+

@@ -2,15 +2,22 @@ body {
   font-family: Arial, sans-serif;
   text-align: center;
   margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
 h1 {
   color: #333;
 }
 
-.loader, .error {
+.loader,
+.error {
   display: none;
   color: red;
+  font-size: 18px;
 }
 
 .select-wrapper {
@@ -35,13 +42,13 @@ h1 {
   height: 48px;
   border-radius: 50%;
   display: inline-block;
-  border-top: 4px solid #FFF;
+  border-top: 4px solid #fff;
   border-right: 4px solid transparent;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
 }
 .loader::after {
-  content: '';  
+  content: '';
   box-sizing: border-box;
   position: absolute;
   left: 0;
@@ -49,7 +56,7 @@ h1 {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border-bottom: 4px solid #FF3D00;
+  border-bottom: 4px solid #ff3d00;
   border-left: 4px solid transparent;
 }
 @keyframes rotation {
@@ -59,4 +66,4 @@ h1 {
   100% {
     transform: rotate(360deg);
   }
-} 
+}
